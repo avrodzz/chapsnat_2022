@@ -2,6 +2,21 @@ export default function LoginScreen({navigation}) {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
+	const auth = getAuth();
+
+	async function handleSubmit() {
+		console.log("handle submit envoked!!")
+
+		await signInWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+			const user = userCredential.user; 
+		})
+		.catch((error) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
+	}
+
 	return (
 		<>
 			<Text style={styles.bigBlue}>Login Here</Text>
@@ -21,7 +36,7 @@ export default function LoginScreen({navigation}) {
 				/>
 			</View>
 			<TouchableOpacity style={styles.loginBtn} onPress={() => {
-				{/* what do you think will go here? */}
+				handleSubmit();
 			}}>
 				<Text style={styles.loginText}>LOGIN</Text>
 			</TouchableOpacity>
