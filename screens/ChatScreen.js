@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import db from "./firebase";
+import { collection, doc, setDoc, updateDoc, onSnapshot, arrayUnion } from "firebase/firestore"; 
+import db from "../firebase";
 import firebase from "firebase/app";
 
 export default function ChatScreen({ navigation }) {
@@ -21,7 +22,7 @@ export default function ChatScreen({ navigation }) {
     await updateDoc(doc(db, "Chats", "myfirstchat"), {
       messages: arrayUnion(messages[0])
     });
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+    //setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
   }, []);
 
   return (
@@ -34,9 +35,10 @@ export default function ChatScreen({ navigation }) {
         name: "Ashwin",
         avatar: "https://placeimg.com/140/140/any",
       }}
-      inverted={true}
+      inverted={false}
       showUserAvatar={true}
       renderUsernameOnMessage={true}
+      // isTyping={true}
     />
   );
 }

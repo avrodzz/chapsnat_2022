@@ -1,3 +1,7 @@
+import React, { useState, useCallback, useEffect } from "react";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { Text, TextInput, View, TouchableOpacity, StyleSheet } from "react-native";
+
 export default function LoginScreen({navigation}) {
 	// Need to have these particular states to login as a user
     const [email, setEmail] = useState();
@@ -22,6 +26,8 @@ export default function LoginScreen({navigation}) {
             console.log(errorMessage, "<--- error message")
 		});
 	}
+
+    console.log("auth object: ", auth, " --->")
     
     // Screen that allows the user to enter in the email and password and sign in
     // - This is where setEmail and setPassword come into play
@@ -56,3 +62,45 @@ export default function LoginScreen({navigation}) {
 		</>
 	)
 }
+
+const styles = StyleSheet.create({
+	redirectBtn: {
+		width:"80%",
+		borderRadius:25,
+		height:50,
+		alignItems:"center",
+		justifyContent:"center",
+		marginTop:40,
+		backgroundColor:"grey",
+		color: "white"
+	},
+	inputView: {
+		backgroundColor: "#FFC0CB",
+		borderRadius: 30,
+		width: "70%",
+		height: 45,
+		marginBottom: 20,
+		alignItems: "center",
+	},
+	TextInput: {
+		height: 50,
+		flex: 1,
+		padding: 10,
+		marginLeft: 20,
+	},
+	loginBtn: {
+		width:"80%",
+		borderRadius:25,
+		height:50,
+		alignItems:"center",
+		justifyContent:"center",
+		marginTop:40,
+		backgroundColor:"#FF1493",
+	},
+	bigBlue: {
+		color: 'blue',
+		fontWeight: 'bold',
+		fontSize: 30,
+		padding: 50
+	}
+})
