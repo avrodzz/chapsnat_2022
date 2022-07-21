@@ -21,8 +21,10 @@ export function useAuthentication() {
 
 			const docRef = doc(db, "Users", user.uid);
 			getDoc(docRef).then((dataSnapshot) => {
+				
 				if (dataSnapshot.exists()) {
 					console.log("Document data:", dataSnapshot.data());
+					setUserData(dataSnapshot.data())
 				}
 				else{
 					console.log("Document Data is not found");
@@ -40,6 +42,6 @@ export function useAuthentication() {
 	}, []);
 
 	return {
-		user
+		user, userData
 	};
 }
